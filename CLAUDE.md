@@ -40,6 +40,29 @@ All skills follow these patterns:
 - Use Cases: `UC-XXX` (3-digit, e.g., UC-001)
 - Business Rules: `BR-XXX`
 
+## Commit Messages
+
+Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification:
+
+```
+<type>[optional scope][!]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Common types: `feat`, `fix`, `refactor`, `chore`, `docs`, `test`, `ci`, `style`, `perf`, `build`.
+Append `!` after the type/scope for breaking changes (also add a `BREAKING CHANGE:` footer).
+
+## Hooks
+
+The project uses Claude Code hooks (`.claude/settings.json`):
+
+- **PreToolUse** (`Edit|Write`): runs `.claude/hooks/protect-files.sh` to block writes to `.env`,
+  `package-lock.json`, and `.git/`
+- **PostToolUse** (`Edit|Write`): auto-formats changed files with Prettier (`npx prettier --write`)
+
 ## Testing Plugins Locally
 
 ```shell
