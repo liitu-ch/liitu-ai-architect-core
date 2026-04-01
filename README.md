@@ -11,16 +11,19 @@ requirements catalogs and entity models to use case diagrams and detailed specif
 
 ## Architecture
 
-The marketplace currently contains one stack-agnostic plugin:
+The marketplace contains two plugins:
 
 - **ai-architect-core** — Requirements engineering and system modeling (requirements, entity model, use cases). Works
   with any tech stack.
+- **ai-architect-testing** — Testing toolkit for React projects (Playwright E2E tests, Vitest unit tests, manual test
+  plans).
 
 Skills follow a sequential software development workflow:
 
-|                       | Inception       | Elaboration                            | Construction     |
-|-----------------------|-----------------|----------------------------------------|------------------|
-| **ai-architect-core** | `/requirements` | `/entity-model`<br>`/use-case-diagram` | `/use-case-spec` |
+|                          | Inception       | Elaboration                            | Construction     | Verification                                      |
+| ------------------------ | --------------- | -------------------------------------- | ---------------- | ------------------------------------------------- |
+| **ai-architect-core**    | `/requirements` | `/entity-model`<br>`/use-case-diagram` | `/use-case-spec` |                                                   |
+| **ai-architect-testing** |                 |                                        |                  | `/playwright-test`<br>`/vitest`<br>`/manual-test` |
 
 ## Installation
 
@@ -31,7 +34,7 @@ Using a marketplace is a two-step process: first add the marketplace catalog, th
 From within Claude Code, run:
 
 ```shell
-/plugin marketplace add liitu-ai-architect/liitu-ai-architect-marketplace
+ /plugin marketplace add https://github.com/liitu-ch/liitu-ai-architect-core
 ```
 
 This registers the catalog with Claude Code so you can browse what's available. No plugins are installed yet.
@@ -40,9 +43,10 @@ This registers the catalog with Claude Code so you can browse what's available. 
 
 ```shell
 /plugin install ai-architect-core@liitu-ai-architect-marketplace
+/plugin install ai-architect-testing@liitu-ai-architect-marketplace
 ```
 
-After installing, run `/reload-plugins` to activate the plugin.
+After installing, run `/reload-plugins` to activate the plugins.
 
 ### Choose an installation scope
 
@@ -80,19 +84,32 @@ stack.
 
 #### Skills
 
-| Skill / Command                        | Description                                                                                           |
-|----------------------------------------|-------------------------------------------------------------------------------------------------------|
-| `/ai-architect-core:requirements`      | Creates requirements catalogs with functional requirements (user stories), NFRs, and constraints      |
-| `/ai-architect-core:entity-model`      | Creates entity models with Mermaid ER diagrams and attribute tables                                   |
-| `/ai-architect-core:use-case-diagram`  | Generates PlantUML use case diagrams from requirements                                                |
-| `/ai-architect-core:use-case-spec`     | Creates detailed use case specifications with scenarios and business rules                             |
-| `/ai-architect-core:hello`             | Greets the user with a personalized message                                                           |
+| Skill / Command                       | Description                                                                                      |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `/ai-architect-core:requirements`     | Creates requirements catalogs with functional requirements (user stories), NFRs, and constraints |
+| `/ai-architect-core:entity-model`     | Creates entity models with Mermaid ER diagrams and attribute tables                              |
+| `/ai-architect-core:use-case-diagram` | Generates PlantUML use case diagrams from requirements                                           |
+| `/ai-architect-core:use-case-spec`    | Creates detailed use case specifications with scenarios and business rules                       |
+| `/ai-architect-core:hello`            | Greets the user with a personalized message                                                      |
 
 #### MCP Servers
 
 | Server       | Description                          |
-|--------------|--------------------------------------|
+| ------------ | ------------------------------------ |
 | **context7** | General library documentation lookup |
+
+### ai-architect-testing
+
+Testing toolkit for React projects. Covers all three testing levels: automated E2E tests, unit tests, and structured
+manual test plans.
+
+#### Skills
+
+| Skill / Command                         | Description                                                                                      |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `/ai-architect-testing:playwright-test` | Creates Playwright E2E tests for React views with accessibility-first locators                   |
+| `/ai-architect-testing:vitest`          | Creates Vitest unit tests for domain logic, data mappers, and React components                   |
+| `/ai-architect-testing:manual-test`     | Creates structured manual test plans with step-by-step test cases for device and browser testing |
 
 ## Using Skills
 
@@ -141,21 +158,20 @@ The `SKILL.md` contains YAML frontmatter (between `---` markers) and markdown in
 name: my-skill
 description: What this skill does and when to use it
 ---
-
 Step-by-step instructions for Claude to follow...
 ```
 
 ### Key frontmatter fields
 
-| Field                      | Description                                                                                     |
-|----------------------------|-------------------------------------------------------------------------------------------------|
-| `name`                     | Display name for the skill. Defaults to directory name.                                         |
-| `description`              | What the skill does and when to use it. Claude uses this to decide when to apply the skill.     |
-| `disable-model-invocation` | Set to `true` to prevent Claude from loading this skill automatically (manual invoke only).     |
-| `user-invocable`           | Set to `false` to hide from the `/` menu (Claude-only background knowledge).                    |
-| `allowed-tools`            | Tools Claude can use without asking permission when this skill is active.                       |
-| `context`                  | Set to `fork` to run in a forked subagent context.                                              |
-| `agent`                    | Which subagent type to use when `context: fork` is set.                                         |
+| Field                      | Description                                                                                 |
+| -------------------------- | ------------------------------------------------------------------------------------------- |
+| `name`                     | Display name for the skill. Defaults to directory name.                                     |
+| `description`              | What the skill does and when to use it. Claude uses this to decide when to apply the skill. |
+| `disable-model-invocation` | Set to `true` to prevent Claude from loading this skill automatically (manual invoke only). |
+| `user-invocable`           | Set to `false` to hide from the `/` menu (Claude-only background knowledge).                |
+| `allowed-tools`            | Tools Claude can use without asking permission when this skill is active.                   |
+| `context`                  | Set to `fork` to run in a forked subagent context.                                          |
+| `agent`                    | Which subagent type to use when `context: fork` is set.                                     |
 
 For a complete list of frontmatter fields and string substitutions, see the
 [Skills documentation](https://code.claude.com/docs/en/skills#frontmatter-reference).

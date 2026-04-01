@@ -1,15 +1,20 @@
 {
-    "name": "liitu-ai-architect-marketplace",
-    "owner": {
-        "name": "Sandro Scalco",
-        "email": "sandro.scalco@liitu.ch",
-        "url": "https://liitu.ch"
+  "name": "liitu-ai-architect-marketplace",
+  "owner": {
+    "name": "Sandro Scalco",
+    "email": "sandro.scalco@liitu.ch",
+    "url": "https://liitu.ch"
+  },
+  "plugins": [
+    {
+      "name": "ai-architect-core",
+      "source": "./ai-architect-core",
+      "description": "AI-powered requirements engineering and system modeling plugin for Claude — create requirements catalogs, entity models, use case diagrams, and specifications through guided slash commands."
     },
-    "plugins": [
-        {
-            "name": "ai-architect-core",
-            "source": "./ai-architect-core",
-            "description": "AI-powered requirements engineering and system modeling plugin for Claude — create requirements catalogs, entity models, use case diagrams, and specifications through guided slash commands."
-        }
-    ]
+    {
+      "name": "ai-architect-testing",
+      "source": "./ai-architect-testing",
+      "description": "AI-powered testing plugin for Claude — create Playwright E2E tests, Vitest unit tests, and structured manual test plans through guided slash commands."
+    }
+  ]
 }

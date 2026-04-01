@@ -4,21 +4,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **Claude Code plugin marketplace** called `liitu-ai-architect-marketplace`. It distributes the
-`ai-architect-core` plugin — a stack-agnostic requirements engineering and system modeling toolkit with skills for
-creating requirements catalogs, entity models, use case diagrams, and use case specifications.
+This is a **Claude Code plugin marketplace** called `liitu-ai-architect-marketplace`. It distributes two plugins:
+
+- **`ai-architect-core`** — a stack-agnostic requirements engineering and system modeling toolkit with skills for
+  creating requirements catalogs, entity models, use case diagrams, and use case specifications.
+- **`ai-architect-testing`** — a testing toolkit with skills for creating Playwright E2E tests, Vitest unit tests,
+  and manual test plans.
 
 ## Repository Structure
 
-The repo has two layers:
+The repo has three layers:
 
 - **Root level** — marketplace configuration (`.claude-plugin/marketplace.json`)
-- **`ai-architect-core/`** — the plugin itself, containing its own `.claude-plugin/plugin.json`, `.mcp.json`, and
+- **`ai-architect-core/`** — the core plugin, containing its own `.claude-plugin/plugin.json`, `.mcp.json`, and
   `skills/` directory
+- **`ai-architect-testing/`** — the testing plugin, containing its own `.claude-plugin/plugin.json` and `skills/`
+  directory
 
-Skills live in `ai-architect-core/skills/<skill-name>/SKILL.md`. Some skills have supporting files:
-- `requirements/REFERENCE.md` — ID prefixes, priority levels, status values, NFR/constraint categories
-- `use-case-spec/templates/use-case.md` — template for use case specification documents
+Skills live in `<plugin>/skills/<skill-name>/SKILL.md`. Some skills have supporting files:
+
+- `ai-architect-core/skills/requirements/REFERENCE.md` — ID prefixes, priority levels, status values, NFR/constraint categories
+- `ai-architect-core/skills/use-case-spec/templates/use-case.md` — template for use case specification documents
+- `ai-architect-testing/skills/playwright-test/templates/example-view.spec.ts` — Playwright E2E test template
+- `ai-architect-testing/skills/vitest/templates/` — Vitest unit test templates (domain logic, components, mappers)
+- `ai-architect-testing/skills/manual-test/templates/manual-test-plan.md` — manual test plan template
 
 ## Skill Authoring Conventions
 
@@ -39,6 +48,7 @@ All skills follow these patterns:
 - Constraints: `C-XXX`
 - Use Cases: `UC-XXX` (3-digit, e.g., UC-001)
 - Business Rules: `BR-XXX`
+- Test Cases (manual): `TC-XXX` (3-digit, e.g., TC-001)
 
 ## Commit Messages
 
@@ -67,6 +77,7 @@ The project uses Claude Code hooks (`.claude/settings.json`):
 
 ```shell
 claude --plugin-dir ./ai-architect-core
+claude --plugin-dir ./ai-architect-testing
 ```
 
 After changes, run `/reload-plugins` inside Claude Code to pick up updates without restarting.
