@@ -1,10 +1,10 @@
 ---
 name: use-case-diagram
 description: >
-  Creates or updates PlantUML use case diagrams defining actors, use cases,
+  Creates or updates Mermaid use case diagrams defining actors, use cases,
   and their relationships from requirements. Use when the user asks to
   "create a use case diagram", "draw a UML diagram", "map actors to use cases",
-  "generate a .puml file", or mentions PlantUML, use case overview, actor
+  "generate a use case overview", or mentions use case diagram, actor
   diagram, or system use cases.
 ---
 
@@ -12,39 +12,51 @@ description: >
 
 ## Instructions
 
-Create or update the PlantUML use case diagram at `docs/use_cases.puml` based on `docs/requirements.md`.
+Create or update the Mermaid use case diagram at `docs/use_cases.md` based on `docs/requirements.md`.
 
 ## DO NOT
 
 - Create diagrams without reading the requirements first
-- Use non-standard PlantUML syntax
+- Use PlantUML syntax
 - Include implementation details in use case names
+- Add actors that are not connected to any use case
 
 ## Template
 
-```plantuml
-@startuml Use Cases Overview
-left to right direction
+````markdown
+# Use Cases Overview
 
-actor "User" as user
-actor "Administrator" as admin
+```mermaid
+flowchart LR
+    actor1([👤 User])
+    actor2([🔧 Administrator])
 
-rectangle "System Name" {
-    usecase "UC-001\nDescription" as UC001
-    usecase "UC-002\nDescription" as UC002
-    usecase "UC-003\nDescription" as UC003
-}
+    subgraph "System Name"
+        UC001[UC-001\nCreate Item]
+        UC002[UC-002\nDelete Item]
+        UC003[UC-003\nManage Users]
+    end
 
-admin --> UC001
-user --> UC002
-user --> UC003
-
-@enduml
+    actor1 --> UC001
+    actor1 --> UC002
+    actor2 --> UC003
 ```
+````
+
+## Syntax Rules
+
+- **Direction**: Always use `flowchart LR` (left to right)
+- **Actors**: Use stadium shape with emoji: `actorId([emoji ActorName])`
+  - Common emojis: 👤 User, 🔧 Admin, 🖥️ System, 📧 External Service
+- **Use Cases**: Use rectangle shape: `UCxxx[UC-XXX\nDescription]`
+- **System Boundary**: Use `subgraph "System Name"` to group use cases
+- **Relationships**: Use `-->` arrows from actors to use cases
+- **Node IDs**: Use `UC001`, `UC002` etc. (no hyphens) as node IDs
+- **Labels**: Use `UC-001\nDescription` as display label (with hyphen)
 
 ## Conventions
 
-- Each use case has a unique id and a description
+- Each use case has a unique ID and a description
 - Use Case ID: UC-{3-digit} (UC-001, UC-002, ...)
 - Each use case should trace to at least one functional requirement
 - Add notes sparingly, only where relationships need clarification
@@ -52,11 +64,11 @@ user --> UC003
 ## Workflow
 
 1. Read the requirements at `docs/requirements.md`
-2. Read existing diagram at `docs/use_cases.puml` (if exists)
+2. Read existing diagram at `docs/use_cases.md` (if exists)
 3. Identify actors and use cases from requirements
-4. Create/update the PlantUML use case diagram
+4. Create/update the Mermaid use case diagram
 5. Validate the diagram:
-    - Each use case traces to at least one functional requirement in `docs/requirements.md`
-    - All actors are connected to at least one use case
-    - Use case IDs follow the UC-{3-digit} convention
-    - PlantUML syntax is valid (no missing `@enduml`, proper arrow syntax)
+   - Each use case traces to at least one functional requirement in `docs/requirements.md`
+   - All actors are connected to at least one use case
+   - Use case IDs follow the UC-{3-digit} convention
+   - Mermaid syntax is valid (proper `flowchart LR`, matching `subgraph`/`end`)

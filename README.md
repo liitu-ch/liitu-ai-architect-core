@@ -88,7 +88,7 @@ stack.
 | ------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | `/ai-architect-core:requirements`     | Creates requirements catalogs with functional requirements (user stories), NFRs, and constraints |
 | `/ai-architect-core:entity-model`     | Creates entity models with Mermaid ER diagrams and attribute tables                              |
-| `/ai-architect-core:use-case-diagram` | Generates PlantUML use case diagrams from requirements                                           |
+| `/ai-architect-core:use-case-diagram` | Generates Mermaid use case diagrams from requirements                                            |
 | `/ai-architect-core:use-case-spec`    | Creates detailed use case specifications with scenarios and business rules                       |
 | `/ai-architect-core:hello`            | Greets the user with a personalized message                                                      |
 

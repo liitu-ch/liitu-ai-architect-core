@@ -37,7 +37,7 @@ All skills follow these patterns:
   description includes trigger phrases ("Use when the user asks to...") so Claude knows when to auto-invoke.
 - **Workflow**: Skills use TodoWrite for task tracking and follow numbered step-by-step workflows.
 - **Output**: Each skill writes to a specific file in `docs/` (e.g., `docs/requirements.md`,
-  `docs/entity_model.md`, `docs/use_cases.puml`, `docs/use_cases/{name}.md`).
+  `docs/entity_model.md`, `docs/use_cases.md`, `docs/use_cases/{name}.md`).
 - **Quality checks**: Skills include validation checklists at the end of their workflows.
 - **$ARGUMENTS**: Used for user-provided input (e.g., the hello skill greets `$ARGUMENTS` by name).
 
