@@ -4,21 +4,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **Claude Code plugin marketplace** called `liitu-ai-architect-marketplace`. It distributes two plugins:
+This is a **Claude Code plugin marketplace** called `liitu-ai-architect-marketplace`. It distributes three plugins:
 
 - **`ai-architect-core`** — a stack-agnostic requirements engineering and system modeling toolkit with skills for
   creating requirements catalogs, entity models, use case diagrams, and use case specifications.
 - **`ai-architect-testing`** — a testing toolkit with skills for creating Playwright E2E tests, Vitest unit tests,
   and manual test plans.
+- **`ai-architect-dev-tools`** — developer workflow tools with a skill for creating conventional commits through
+  guided interaction.
 
 ## Repository Structure
 
-The repo has three layers:
+The repo has four layers:
 
 - **Root level** — marketplace configuration (`.claude-plugin/marketplace.json`)
 - **`ai-architect-core/`** — the core plugin, containing its own `.claude-plugin/plugin.json`, `.mcp.json`, and
   `skills/` directory
 - **`ai-architect-testing/`** — the testing plugin, containing its own `.claude-plugin/plugin.json` and `skills/`
+  directory
+- **`ai-architect-dev-tools/`** — the dev tools plugin, containing its own `.claude-plugin/plugin.json` and `skills/`
   directory
 
 Skills live in `<plugin>/skills/<skill-name>/SKILL.md`. Some skills have supporting files:
@@ -78,6 +82,7 @@ The project uses Claude Code hooks (`.claude/settings.json`):
 ```shell
 claude --plugin-dir ./ai-architect-core
 claude --plugin-dir ./ai-architect-testing
+claude --plugin-dir ./ai-architect-dev-tools
 ```
 
 After changes, run `/reload-plugins` inside Claude Code to pick up updates without restarting.

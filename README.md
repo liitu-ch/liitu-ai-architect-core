@@ -11,19 +11,21 @@ requirements catalogs and entity models to use case diagrams and detailed specif
 
 ## Architecture
 
-The marketplace contains two plugins:
+The marketplace contains three plugins:
 
 - **ai-architect-core** — Requirements engineering and system modeling (requirements, entity model, use cases). Works
   with any tech stack.
 - **ai-architect-testing** — Testing toolkit for React projects (Playwright E2E tests, Vitest unit tests, manual test
   plans).
+- **ai-architect-dev-tools** — Developer workflow tools (conventional commits).
 
 Skills follow a sequential software development workflow:
 
-|                          | Inception       | Elaboration                            | Construction     | Verification                                      |
-| ------------------------ | --------------- | -------------------------------------- | ---------------- | ------------------------------------------------- |
-| **ai-architect-core**    | `/requirements` | `/entity-model`<br>`/use-case-diagram` | `/use-case-spec` |                                                   |
-| **ai-architect-testing** |                 |                                        |                  | `/playwright-test`<br>`/vitest`<br>`/manual-test` |
+|                            | Inception       | Elaboration                            | Construction     | Verification                                      |
+| -------------------------- | --------------- | -------------------------------------- | ---------------- | ------------------------------------------------- |
+| **ai-architect-core**      | `/requirements` | `/entity-model`<br>`/use-case-diagram` | `/use-case-spec` |                                                   |
+| **ai-architect-testing**   |                 |                                        |                  | `/playwright-test`<br>`/vitest`<br>`/manual-test` |
+| **ai-architect-dev-tools** | `/commit`       | `/commit`                              | `/commit`        | `/commit`                                         |
 
 ## Installation
 
@@ -44,6 +46,7 @@ This registers the catalog with Claude Code so you can browse what's available. 
 ```shell
 /plugin install ai-architect-core@liitu-ai-architect-marketplace
 /plugin install ai-architect-testing@liitu-ai-architect-marketplace
+/plugin install ai-architect-dev-tools@liitu-ai-architect-marketplace
 ```
 
 After installing, run `/reload-plugins` to activate the plugins.
@@ -110,6 +113,16 @@ manual test plans.
 | `/ai-architect-testing:playwright-test` | Creates Playwright E2E tests for React views with accessibility-first locators                   |
 | `/ai-architect-testing:vitest`          | Creates Vitest unit tests for domain logic, data mappers, and React components                   |
 | `/ai-architect-testing:manual-test`     | Creates structured manual test plans with step-by-step test cases for device and browser testing |
+
+### ai-architect-dev-tools
+
+Developer workflow tools that streamline common git operations through guided interaction.
+
+#### Skills
+
+| Skill / Command                  | Description                                                                                         |
+| -------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `/ai-architect-dev-tools:commit` | Creates conventional commits by analyzing changes, asking about type/scope, and generating messages |
 
 ## Using Skills
 
