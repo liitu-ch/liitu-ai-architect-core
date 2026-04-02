@@ -33,10 +33,10 @@ Use [templates/use-case.md](templates/use-case.md) as the document structure.
 
 ## Overview
 
-**Use Case ID:** UC-001
-**Use Case Name:** Create Reservation
-**Primary Actor:** Front Desk Clerk
-**Goal:** Create a new room reservation for a guest
+**Use Case ID:** UC-001  
+**Use Case Name:** Create Reservation  
+**Primary Actor:** Front Desk Clerk  
+**Goal:** Create a new room reservation for a guest  
 **Status:** Approved
 
 ## Preconditions
@@ -123,9 +123,9 @@ Reservations of 3 or more nights require a 50% deposit.
 5. Define preconditions (what must be true before starting)
 6. Write the Main Success Scenario step by step
 7. Identify alternative flows:
-    - Error conditions
-    - Optional paths
-    - Exceptional situations
+   - Error conditions
+   - Optional paths
+   - Exceptional situations
 8. Define postconditions for both success and failure
 9. Document applicable business rules
 10. Review for completeness and clarity
