@@ -126,6 +126,21 @@ describe("SearchField", () => {
 });
 ```
 
+### Architecture
+
+Test that module imports don't cross layer boundaries (e.g. Domain, Application, Infrastructure, Presentation). These are plain import checks — no framework needed.
+
+```ts
+import { describe, it, expect } from "vitest";
+
+describe("layer boundaries", () => {
+  it("domain does not import from infrastructure", async () => {
+    const src = await import("../domain/pricing?raw");
+    expect(src.default).not.toMatch(/from ['"].*infrastructure/);
+  });
+});
+```
+
 ## Locating Elements (Testing Library)
 
 Use accessibility queries — same philosophy as Playwright, but for unit tests.
