@@ -1,7 +1,7 @@
 {
   "name": "ai-architect-dev-tools",
   "description": "Developer workflow tools for Claude — create conventional commits through guided slash commands.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Sandro Scalco",
     "email": "sandro.scalco@liitu.ch",
