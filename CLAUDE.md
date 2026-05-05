@@ -7,7 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a **Claude Code plugin marketplace** called `liitu-ai-architect-marketplace`. It distributes three plugins:
 
 - **`ai-architect-core`** — a stack-agnostic requirements engineering and system modeling toolkit with skills for
-  creating requirements catalogs, entity models, use case diagrams, and use case specifications.
+  creating requirements catalogs, entity models, use case diagrams, use case specifications, and implementation
+  plans.
 - **`ai-architect-testing`** — a testing toolkit with skills for documenting a project-level testing concept,
   creating Playwright E2E tests, Vitest unit tests (including architecture/layer-boundary checks), and manual
   test plans.
@@ -49,8 +50,9 @@ All skills follow these patterns:
   description includes trigger phrases ("Use when the user asks to...") so Claude knows when to auto-invoke.
 - **Workflow**: Skills use TodoWrite for task tracking and follow numbered step-by-step workflows.
 - **Output**: Each skill writes to a specific file in `docs/` (e.g., `docs/requirements.md`,
-  `docs/entity_model.md`, `docs/use_cases.md`, `docs/use_cases/{name}.md`). The `testing-concept` skill is the
-  exception and writes `TESTING.md` at the project root.
+  `docs/entity_model.md`, `docs/use_cases.md`, `docs/use_cases/{name}.md`,
+  `docs/implementation/{uc}/plan.md`). The `testing-concept` skill is the exception and writes `TESTING.md` at
+  the project root.
 - **Quality checks**: Skills include validation checklists at the end of their workflows.
 - **$ARGUMENTS**: Used for user-provided input (e.g., the hello skill greets `$ARGUMENTS` by name).
 

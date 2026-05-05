@@ -9,7 +9,7 @@
     {
       "name": "ai-architect-core",
       "source": "./ai-architect-core",
-      "description": "AI-powered requirements engineering and system modeling plugin for Claude — create requirements catalogs, entity models, use case diagrams, and specifications through guided slash commands."
+      "description": "AI-powered requirements engineering and system modeling plugin for Claude — create requirements catalogs, entity models, use case diagrams, specifications, and implementation plans through guided slash commands."
     },
     {
       "name": "ai-architect-testing",
