@@ -8,8 +8,9 @@ This is a **Claude Code plugin marketplace** called `liitu-ai-architect-marketpl
 
 - **`ai-architect-core`** — a stack-agnostic requirements engineering and system modeling toolkit with skills for
   creating requirements catalogs, entity models, use case diagrams, and use case specifications.
-- **`ai-architect-testing`** — a testing toolkit with skills for creating Playwright E2E tests, Vitest unit tests,
-  and manual test plans.
+- **`ai-architect-testing`** — a testing toolkit with skills for documenting a project-level testing concept,
+  creating Playwright E2E tests, Vitest unit tests (including architecture/layer-boundary checks), and manual
+  test plans.
 - **`ai-architect-dev-tools`** — developer workflow tools with a skill for creating conventional commits through
   guided interaction.
 
@@ -18,17 +19,24 @@ This is a **Claude Code plugin marketplace** called `liitu-ai-architect-marketpl
 The repo has four layers:
 
 - **Root level** — marketplace configuration (`.claude-plugin/marketplace.json`)
-- **`ai-architect-core/`** — the core plugin, containing its own `.claude-plugin/plugin.json`, `.mcp.json`, and
-  `skills/` directory
-- **`ai-architect-testing/`** — the testing plugin, containing its own `.claude-plugin/plugin.json` and `skills/`
-  directory
-- **`ai-architect-dev-tools/`** — the dev tools plugin, containing its own `.claude-plugin/plugin.json` and `skills/`
-  directory
+- **`ai-architect-core/`** — the core plugin, containing its own `.claude-plugin/plugin.json`, `.mcp.json`,
+  `skills/`, and `commands/` directories
+- **`ai-architect-testing/`** — the testing plugin, containing its own `.claude-plugin/plugin.json`, `skills/`,
+  and `commands/` directories
+- **`ai-architect-dev-tools/`** — the dev tools plugin, containing its own `.claude-plugin/plugin.json`,
+  `skills/`, and `commands/` directories
+
+Each plugin ships both **skills** (`skills/<name>/SKILL.md`) and **slash commands**
+(`commands/ai-<name>.md`). Commands are thin wrappers that delegate to the skill of the same name; they exist
+so users can type the short alias `/ai-<name>` instead of the namespaced form
+`/<plugin-name>:<name>`.
 
 Skills live in `<plugin>/skills/<skill-name>/SKILL.md`. Some skills have supporting files:
 
 - `ai-architect-core/skills/requirements/REFERENCE.md` — ID prefixes, priority levels, status values, NFR/constraint categories
 - `ai-architect-core/skills/use-case-spec/templates/use-case.md` — template for use case specification documents
+- `ai-architect-testing/skills/testing-concept/templates/testing-concept.md` — template for the project-level
+  `TESTING.md`
 - `ai-architect-testing/skills/playwright-test/templates/example-view.spec.ts` — Playwright E2E test template
 - `ai-architect-testing/skills/vitest/templates/` — Vitest unit test templates (domain logic, components, mappers)
 - `ai-architect-testing/skills/manual-test/templates/manual-test-plan.md` — manual test plan template
@@ -41,9 +49,17 @@ All skills follow these patterns:
   description includes trigger phrases ("Use when the user asks to...") so Claude knows when to auto-invoke.
 - **Workflow**: Skills use TodoWrite for task tracking and follow numbered step-by-step workflows.
 - **Output**: Each skill writes to a specific file in `docs/` (e.g., `docs/requirements.md`,
-  `docs/entity_model.md`, `docs/use_cases.md`, `docs/use_cases/{name}.md`).
+  `docs/entity_model.md`, `docs/use_cases.md`, `docs/use_cases/{name}.md`). The `testing-concept` skill is the
+  exception and writes `TESTING.md` at the project root.
 - **Quality checks**: Skills include validation checklists at the end of their workflows.
 - **$ARGUMENTS**: Used for user-provided input (e.g., the hello skill greets `$ARGUMENTS` by name).
+
+## Command Authoring Conventions
+
+For every skill `<name>` there is a matching slash command `commands/ai-<name>.md` in the same plugin. Commands
+are thin wrappers — they contain a short YAML frontmatter (`description`) and a body that tells Claude to invoke
+the corresponding skill, passing through `$ARGUMENTS`. When adding a new skill, always add the matching
+`/ai-<name>` command so the user-facing alias keeps working.
 
 ## ID Conventions
 
