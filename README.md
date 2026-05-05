@@ -13,19 +13,19 @@ requirements catalogs and entity models to use case diagrams and detailed specif
 
 The marketplace contains three plugins:
 
-- **ai-architect-core** — Requirements engineering and system modeling (requirements, entity model, use cases,
-  implementation plans). Works with any tech stack.
+- **ai-architect-core** — Requirements engineering and system modeling (requirements, entity model, use cases).
+  Works with any tech stack.
 - **ai-architect-testing** — Testing toolkit for React projects (project-level testing concept, Playwright E2E
   tests, Vitest unit tests including architecture/layer-boundary checks, manual test plans).
-- **ai-architect-dev-tools** — Developer workflow tools (conventional commits).
+- **ai-architect-dev-tools** — Developer workflow tools (conventional commits, use case implementation plans).
 
 Skills follow a sequential software development workflow:
 
-|                            | Inception          | Elaboration                                  | Construction                                    | Verification                                               |
-| -------------------------- | ------------------ | -------------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------- |
-| **ai-architect-core**      | `/ai-requirements` | `/ai-entity-model`<br>`/ai-use-case-diagram` | `/ai-use-case-spec`<br>`/ai-implement-use-case` |                                                            |
-| **ai-architect-testing**   |                    | `/ai-testing-concept`                        |                                                 | `/ai-playwright-test`<br>`/ai-vitest`<br>`/ai-manual-test` |
-| **ai-architect-dev-tools** | `/ai-commit`       | `/ai-commit`                                 | `/ai-commit`                                    | `/ai-commit`                                               |
+|                            | Inception          | Elaboration                                  | Construction                             | Verification                                               |
+| -------------------------- | ------------------ | -------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------- |
+| **ai-architect-core**      | `/ai-requirements` | `/ai-entity-model`<br>`/ai-use-case-diagram` | `/ai-use-case-spec`                      |                                                            |
+| **ai-architect-testing**   |                    | `/ai-testing-concept`                        |                                          | `/ai-playwright-test`<br>`/ai-vitest`<br>`/ai-manual-test` |
+| **ai-architect-dev-tools** | `/ai-commit`       | `/ai-commit`                                 | `/ai-implement-use-case`<br>`/ai-commit` | `/ai-commit`                                               |
 
 ## Installation
 
@@ -87,14 +87,13 @@ stack.
 
 #### Skills & Commands
 
-| Command                  | Skill                                   | Description                                                                                      |
-| ------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `/ai-requirements`       | `/ai-architect-core:requirements`       | Creates requirements catalogs with functional requirements (user stories), NFRs, and constraints |
-| `/ai-entity-model`       | `/ai-architect-core:entity-model`       | Creates entity models with Mermaid ER diagrams and attribute tables                              |
-| `/ai-use-case-diagram`   | `/ai-architect-core:use-case-diagram`   | Generates Mermaid use case diagrams from requirements                                            |
-| `/ai-use-case-spec`      | `/ai-architect-core:use-case-spec`      | Creates detailed use case specifications with scenarios and business rules                       |
-| `/ai-implement-use-case` | `/ai-architect-core:implement-use-case` | Creates a structured implementation plan for a use case with traceability and ordered tasks      |
-| `/ai-hello`              | `/ai-architect-core:hello`              | Greets the user with a personalized message                                                      |
+| Command                | Skill                                 | Description                                                                                      |
+| ---------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `/ai-requirements`     | `/ai-architect-core:requirements`     | Creates requirements catalogs with functional requirements (user stories), NFRs, and constraints |
+| `/ai-entity-model`     | `/ai-architect-core:entity-model`     | Creates entity models with Mermaid ER diagrams and attribute tables                              |
+| `/ai-use-case-diagram` | `/ai-architect-core:use-case-diagram` | Generates Mermaid use case diagrams from requirements                                            |
+| `/ai-use-case-spec`    | `/ai-architect-core:use-case-spec`    | Creates detailed use case specifications with scenarios and business rules                       |
+| `/ai-hello`            | `/ai-architect-core:hello`            | Greets the user with a personalized message                                                      |
 
 #### MCP Servers
 
@@ -118,13 +117,15 @@ automated E2E tests, unit tests (including architecture/layer-boundary checks), 
 
 ### ai-architect-dev-tools
 
-Developer workflow tools that streamline common git operations through guided interaction.
+Developer workflow tools that streamline day-to-day implementation work — from planning a use case to crafting a
+conventional commit — through guided interaction.
 
 #### Skills & Commands
 
-| Command      | Skill                            | Description                                                                                         |
-| ------------ | -------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `/ai-commit` | `/ai-architect-dev-tools:commit` | Creates conventional commits by analyzing changes, asking about type/scope, and generating messages |
+| Command                  | Skill                                        | Description                                                                                         |
+| ------------------------ | -------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `/ai-implement-use-case` | `/ai-architect-dev-tools:implement-use-case` | Creates a structured implementation plan for a use case with traceability and ordered tasks         |
+| `/ai-commit`             | `/ai-architect-dev-tools:commit`             | Creates conventional commits by analyzing changes, asking about type/scope, and generating messages |
 
 ## Using Skills
 
