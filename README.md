@@ -15,17 +15,17 @@ The marketplace contains three plugins:
 
 - **ai-architect-core** — Requirements engineering and system modeling (requirements, entity model, use cases). Works
   with any tech stack.
-- **ai-architect-testing** — Testing toolkit for React projects (Playwright E2E tests, Vitest unit tests, manual test
-  plans).
+- **ai-architect-testing** — Testing toolkit for React projects (project-level testing concept, Playwright E2E
+  tests, Vitest unit tests including architecture/layer-boundary checks, manual test plans).
 - **ai-architect-dev-tools** — Developer workflow tools (conventional commits).
 
 Skills follow a sequential software development workflow:
 
-|                            | Inception       | Elaboration                            | Construction     | Verification                                      |
-| -------------------------- | --------------- | -------------------------------------- | ---------------- | ------------------------------------------------- |
-| **ai-architect-core**      | `/requirements` | `/entity-model`<br>`/use-case-diagram` | `/use-case-spec` |                                                   |
-| **ai-architect-testing**   |                 |                                        |                  | `/playwright-test`<br>`/vitest`<br>`/manual-test` |
-| **ai-architect-dev-tools** | `/commit`       | `/commit`                              | `/commit`        | `/commit`                                         |
+|                            | Inception          | Elaboration                                  | Construction        | Verification                                               |
+| -------------------------- | ------------------ | -------------------------------------------- | ------------------- | ---------------------------------------------------------- |
+| **ai-architect-core**      | `/ai-requirements` | `/ai-entity-model`<br>`/ai-use-case-diagram` | `/ai-use-case-spec` |                                                            |
+| **ai-architect-testing**   |                    | `/ai-testing-concept`                        |                     | `/ai-playwright-test`<br>`/ai-vitest`<br>`/ai-manual-test` |
+| **ai-architect-dev-tools** | `/ai-commit`       | `/ai-commit`                                 | `/ai-commit`        | `/ai-commit`                                               |
 
 ## Installation
 
@@ -85,15 +85,15 @@ When team members trust the repository folder, Claude Code prompts them to insta
 Stack-agnostic requirements engineering and system modeling plugin. Use this for any project, regardless of technology
 stack.
 
-#### Skills
+#### Skills & Commands
 
-| Skill / Command                       | Description                                                                                      |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `/ai-architect-core:requirements`     | Creates requirements catalogs with functional requirements (user stories), NFRs, and constraints |
-| `/ai-architect-core:entity-model`     | Creates entity models with Mermaid ER diagrams and attribute tables                              |
-| `/ai-architect-core:use-case-diagram` | Generates Mermaid use case diagrams from requirements                                            |
-| `/ai-architect-core:use-case-spec`    | Creates detailed use case specifications with scenarios and business rules                       |
-| `/ai-architect-core:hello`            | Greets the user with a personalized message                                                      |
+| Command                | Skill                                 | Description                                                                                      |
+| ---------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `/ai-requirements`     | `/ai-architect-core:requirements`     | Creates requirements catalogs with functional requirements (user stories), NFRs, and constraints |
+| `/ai-entity-model`     | `/ai-architect-core:entity-model`     | Creates entity models with Mermaid ER diagrams and attribute tables                              |
+| `/ai-use-case-diagram` | `/ai-architect-core:use-case-diagram` | Generates Mermaid use case diagrams from requirements                                            |
+| `/ai-use-case-spec`    | `/ai-architect-core:use-case-spec`    | Creates detailed use case specifications with scenarios and business rules                       |
+| `/ai-hello`            | `/ai-architect-core:hello`            | Greets the user with a personalized message                                                      |
 
 #### MCP Servers
 
@@ -103,26 +103,27 @@ stack.
 
 ### ai-architect-testing
 
-Testing toolkit for React projects. Covers all three testing levels: automated E2E tests, unit tests, and structured
-manual test plans.
+Testing toolkit for React projects. Covers a project-level testing concept plus all three testing levels:
+automated E2E tests, unit tests (including architecture/layer-boundary checks), and structured manual test plans.
 
-#### Skills
+#### Skills & Commands
 
-| Skill / Command                         | Description                                                                                      |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `/ai-architect-testing:playwright-test` | Creates Playwright E2E tests for React views with accessibility-first locators                   |
-| `/ai-architect-testing:vitest`          | Creates Vitest unit tests for domain logic, data mappers, and React components                   |
-| `/ai-architect-testing:manual-test`     | Creates structured manual test plans with step-by-step test cases for device and browser testing |
+| Command               | Skill                                   | Description                                                                                               |
+| --------------------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `/ai-testing-concept` | `/ai-architect-testing:testing-concept` | Generates a project-level `TESTING.md` documenting which test levels are used, why, and the project setup |
+| `/ai-playwright-test` | `/ai-architect-testing:playwright-test` | Creates Playwright E2E tests for React views with accessibility-first locators and multi-device coverage  |
+| `/ai-vitest`          | `/ai-architect-testing:vitest`          | Creates Vitest unit tests for domain logic, mappers, components, and architecture/layer-boundary checks   |
+| `/ai-manual-test`     | `/ai-architect-testing:manual-test`     | Creates structured manual test plans with step-by-step test cases for device and browser testing          |
 
 ### ai-architect-dev-tools
 
 Developer workflow tools that streamline common git operations through guided interaction.
 
-#### Skills
+#### Skills & Commands
 
-| Skill / Command                  | Description                                                                                         |
-| -------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `/ai-architect-dev-tools:commit` | Creates conventional commits by analyzing changes, asking about type/scope, and generating messages |
+| Command      | Skill                            | Description                                                                                         |
+| ------------ | -------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `/ai-commit` | `/ai-architect-dev-tools:commit` | Creates conventional commits by analyzing changes, asking about type/scope, and generating messages |
 
 ## Using Skills
 
@@ -132,19 +133,22 @@ markdown instructions.
 
 ### How skills work
 
-Each skill has a **description** that tells Claude when to use it. Skills can be invoked in two ways:
+Each skill has a **description** that tells Claude when to use it. Skills can be invoked in three ways:
 
-- **Directly** — type the slash command (e.g., `/ai-architect-core:requirements`) to invoke it explicitly
-- **Automatically** — Claude recognizes when a skill is relevant to your conversation and loads it on its own
+- **Short slash command** — type the `/ai-*` alias (e.g., `/ai-requirements`) shipped by the plugin's
+  `commands/` directory. This is the recommended way to invoke a skill explicitly.
+- **Namespaced skill path** — type the fully qualified skill (e.g., `/ai-architect-core:requirements`).
+- **Automatically** — Claude recognizes when a skill is relevant to your conversation and loads it on its own.
 
 When Claude loads a skill, the skill's instructions guide how Claude approaches the task. Skill descriptions are always
 in context so Claude knows what's available, but the full skill content only loads when invoked.
 
 ### Passing arguments
 
-You can pass arguments when invoking a skill. For example:
+You can pass arguments when invoking a skill via either form. For example:
 
 ```shell
+/ai-hello Alex
 /ai-architect-core:hello Alex
 ```
 
