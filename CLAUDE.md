@@ -7,13 +7,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a **Claude Code plugin marketplace** called `liitu-ai-architect-marketplace`. It distributes three plugins:
 
 - **`ai-architect-core`** — a stack-agnostic requirements engineering and system modeling toolkit with skills for
-  creating requirements catalogs, entity models, use case diagrams, use case specifications, and implementation
-  plans.
+  creating requirements catalogs, entity models, use case diagrams, and use case specifications.
 - **`ai-architect-testing`** — a testing toolkit with skills for documenting a project-level testing concept,
   creating Playwright E2E tests, Vitest unit tests (including architecture/layer-boundary checks), and manual
   test plans.
-- **`ai-architect-dev-tools`** — developer workflow tools with a skill for creating conventional commits through
-  guided interaction.
+- **`ai-architect-dev-tools`** — developer workflow tools with skills for creating conventional commits and
+  structured use case implementation plans through guided interaction.
 
 ## Repository Structure
 

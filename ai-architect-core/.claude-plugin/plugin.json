@@ -1,6 +1,6 @@
 {
   "name": "ai-architect-core",
-  "description": "AI-powered requirements engineering and system modeling plugin for Claude — create requirements catalogs, entity models, use case diagrams, specifications, and implementation plans through guided slash commands.",
+  "description": "AI-powered requirements engineering and system modeling plugin for Claude — create requirements catalogs, entity models, use case diagrams, and use case specifications through guided slash commands.",
   "version": "1.3.0",
   "author": {
     "name": "Sandro Scalco",
